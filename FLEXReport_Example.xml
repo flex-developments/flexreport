@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report id="flexreport-00001" date="01/01/2017" xmlns="x-schema:FLEXReport_Schema.xml">
+    <Hosts>
+      <Host id="H1" ip="0.0.0.1" os="unknow">
+        <HostInterfaces>
+          <HostInterface id="H1-I1">
+            <HostNames>
+              <HostName hostname="www.testing.com" />
+            </HostNames>
+            <HostServices>
+              <HostService id="H1-I1-S1" name="http" protocol="tcp" version="Unknow" status="open">
+                <ServicePorts>
+                  <ServicePort port="80" />
+                </ServicePorts>
+              </HostService>
+            </HostServices>
+          </HostInterface>
+        </HostInterfaces>
+      </Host>
+    </Hosts>
+
+    <Vulnerabilities>
+      <Vulnerability id="V1" type="WEB" severity="low"> <!-- Type="HOST | SERVICE | WEB -->
+        <VulnerabilityName>TestClickjacking: X-Frame-Options header missing</VulnerabilityName>
+        <VulnerabilityDescription>Vulnerability description... etc etc etc...</VulnerabilityDescription>
+        <VulnerabilityResolution>Vulnerability recomendation... etc etc etc...</VulnerabilityResolution>
+        <VulnerabilityReferences>
+          <VulnerabilityReference>https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options</VulnerabilityReference>
+          <VulnerabilityReference>http://en.wikipedia.org/wiki/Clickjacking</VulnerabilityReference>
+          <VulnerabilityReference>http://www.sectheory.com/clickjacking.htm</VulnerabilityReference>
+        </VulnerabilityReferences>
+        <VulnerableHosts>
+          <!-- Web -->
+          <VulnerableHost id="H1" subid="H1-I1-S1" />
+        </VulnerableHosts>
+        <WebVulnerabilityDetails> <!-- Only for Web Vulnerabilities-->
+          <VulnerabilityWebSite>www.testing.com</VulnerabilityWebSite>
+          <VulnerabilityPath>http://www.testing.com:80</VulnerabilityPath>
+          <VulnerabilityRequest>GET / HTTP/1.1
+Cookie: xxxxx=jkiuytrewsdcfvcxawertyuiopvlkmnbvchgfdcvbhgbnjuyhgas; yyyyyy=loikjuyh-loik-poiu-qwed-gfcxgfcfcfcgfcgfasdr; JSESSIONID=wertyuioplkjhgfdsxcvbnmkiuytruytrdfvbhjkiuytrfdcvedcfv
+Host: www.testing.com
+Connection: Keep-alive
+Accept-Encoding: gzip,deflate
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36
+Accept: */*</VulnerabilityRequest>
+          <VulnerabilityResponse>HTTP/1.1 200 OK
+Date: Mon, 01 Ene 2017 17:07:09 GMT
+X-ServedBy: xxx000
+Accept-Ranges: bytes
+Content-Type: text/html; charset=UTF-8
+X-PC-AppVer: 9999
+X-PC-Date: Mon, 01 Ene 2017 23:31:11 GMT
+X-PC-Host: 0.0.0.1
+Last-Modified: Mon, 01 Ene 2017 14:51:10 GMT
+ETag: W/&quot;9876ygfdrt543wsdtyhbnjiuytfrtyhs-gzip&quot;
+X-PC-Key: se45678uhvfde4567tfv7ytghui-testing
+X-PC-Hit: true
+Content-Length: 99999
+X-ContextId: 12345678/12345678
+X-Via: 1.1 echo999
+Original-Content-Encoding: gzip</VulnerabilityResponse>
+          <VulnerabilityParams></VulnerabilityParams>
+        </WebVulnerabilityDetails>
+      </Vulnerability>
+      <Vulnerability id="V2" type="WEB" severity="medium"> <!-- Type="HOST | SERVICE | WEB -->
+        <VulnerabilityName>TestInsecure transition from HTTP to HTTPS in form post</VulnerabilityName>
+        <VulnerabilityDescription>Vulnerability description 2... etc etc etc...</VulnerabilityDescription>
+        <VulnerabilityResolution>Vulnerability recomendation 2... etc etc etc...</VulnerabilityResolution>
+        <VulnerabilityReferences>
+        </VulnerabilityReferences>
+        <VulnerableHosts>
+          <!-- Web -->
+          <VulnerableHost id="H1" subid="H1-I1-S1" />
+        </VulnerableHosts>
+        <WebVulnerabilityDetails> <!-- Only for Web Vulnerabilities-->
+          <VulnerabilityWebSite>www.testing.com</VulnerabilityWebSite>
+          <VulnerabilityPath>http://www.testing.com:80/contacto</VulnerabilityPath>
+          <VulnerabilityRequest>GET /contacto/ HTTP/1.1
+Pragma: no-cache
+Cache-Control: no-cache
+Referer: http://www.testing.com/contacto
+Cookie: xxxxx=jkiuytrewsdcfvcxawertyuiopvlkmnbvchgfdcvbhgbnjuyhgas; yyyyyy=loikjuyh-loik-poiu-qwed-gfcxgfcfcfcgfcgfasdr; JSESSIONID=wertyuioplkjhgfdsxcvbnmkiuytruytrdfvbhjkiuytrfdcvedcfv
+Host: www.testing.com
+Connection: Keep-alive
+Accept-Encoding: gzip,deflate
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36
+Accept: */*</VulnerabilityRequest>
+          <VulnerabilityResponse>HTTP/1.1 200 OK
+Date: Mon, 01 Ene 2017 17:07:09 GMT
+X-ServedBy: xxx000
+Accept-Ranges: bytes
+Content-Type: text/html; charset=UTF-8
+X-PC-AppVer: 9999
+Vary: Accept-Encoding, User-Agent
+X-PC-Date: Mon, 01 Ene 2017 23:31:11 GMT
+X-PC-Host: 0.0.0.1
+Last-Modified: Mon, 01 Ene 2017 14:51:10 GMT
+ETag: W/&quot;9876ygfdrt543wsdtyhbnjiuytfrtyhs-gzip&quot;
+X-PC-Key: se45678uhvfde4567tfv7ytghui-testing
+X-PC-Hit: false
+Content-Length: 99999
+X-ContextId: 12345678/12345678
+X-Via: 1.1 echo999
+Original-Content-Encoding: gzip
+Content-Length: 49937</VulnerabilityResponse>
+          <VulnerabilityParams></VulnerabilityParams>
+        </WebVulnerabilityDetails>
+      </Vulnerability>
+    </Vulnerabilities>
+</Report>

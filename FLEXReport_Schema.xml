@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="x-schema:FLEXReport_Schema.xml" xmlns:f="x-schema:FLEXReport_Schema.xml">
+  <xs:element name="Report">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" ref="f:Hosts"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:Vulnerabilities"/>
+      </xs:sequence>
+      <xs:attribute name="date" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="(([012]\d)|([3][01]))/((0[1-9])|(1[012]))/(19|20)\d{2}"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="id" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="flexreport-[A-z0-9]*"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Hosts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="255" ref="f:Host"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Host">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:HostInterfaces"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="ip" use="required" type="xs:NMTOKEN"/>
+      <xs:attribute name="os" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="(unknow|Windows|Linux)"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostInterfaces">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="f:HostInterface"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostInterface">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:HostNames"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:HostServices"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostNames">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="f:HostName"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostName">
+    <xs:complexType>
+      <xs:attribute name="hostname" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostServices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="f:HostService"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HostService">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:ServicePorts"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+      <xs:attribute name="protocol" use="required" type="xs:NCName"/>
+      <xs:attribute name="status" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="(unknow|open|close)"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="version" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServicePorts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="65535" ref="f:ServicePort"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServicePort">
+    <xs:complexType>
+      <xs:attribute name="port" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="65535"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Vulnerabilities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="f:Vulnerability"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Vulnerability">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" ref="f:VulnerabilityName"/>
+        <xs:element minOccurs="1" maxOccurs="1" ref="f:VulnerabilityDescription"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityResolution"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityReferences"/>
+        <xs:element minOccurs="1" maxOccurs="1" ref="f:VulnerableHosts"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:WebVulnerabilityDetails"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="severity" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="(low|medium|high)"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="type" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="(HOST|SERVICE|WEB)"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VulnerabilityName" type="xs:string"/>
+  <xs:element name="VulnerabilityDescription" type="xs:string"/>
+  <xs:element name="VulnerabilityResolution" type="xs:string"/>
+  <xs:element name="VulnerabilityReferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="10" ref="f:VulnerabilityReference"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VulnerabilityReference" type="xs:anyURI"/>
+  <xs:element name="VulnerableHosts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="255" ref="f:VulnerableHost"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VulnerableHost">
+    <xs:complexType>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="subid" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WebVulnerabilityDetails">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="f:VulnerabilityWebSite"/>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="f:VulnerabilityPath"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityRequest"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityResponse"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityParams"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityMethod"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityPName"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityQuery"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="f:VulnerabilityCategory"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VulnerabilityWebSite" type="xs:NCName"/>
+  <xs:element name="VulnerabilityPath" type="xs:anyURI"/>
+  <xs:element name="VulnerabilityRequest" type="xs:string"/>
+  <xs:element name="VulnerabilityResponse" type="xs:string"/>
+  <xs:element name="VulnerabilityParams" type="xs:string"/>
+  <xs:element name="VulnerabilityMethod" type="xs:string"/>
+  <xs:element name="VulnerabilityPName" type="xs:string"/>
+  <xs:element name="VulnerabilityQuery" type="xs:string"/>
+  <xs:element name="VulnerabilityCategory" type="xs:string"/>
+</xs:schema>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Report id="flexreport-xxxxx" date="" xmlns="x-schema:FLEXReport_Schema.xml">
+    <Hosts>
+      <Host id="" ip="" os="">
+        <HostInterfaces>
+          <HostInterface id="">
+            <HostNames>
+              <HostName hostname="" />
+            </HostNames>
+            <HostServices>
+              <HostService id="" name="" protocol="" version="" status="">
+                <ServicePorts>
+                  <ServicePort port=""/>
+                </ServicePorts>
+              </HostService>
+            </HostServices>
+          </HostInterface>
+        </HostInterfaces>
+      </Host>
+    </Hosts>
+
+    <Vulnerabilities>
+      <Vulnerability id="" type="" severity=""> <!-- Type="HOST | SERVICE | WEB -->
+        <VulnerabilityName>NAME</VulnerabilityName>
+        <VulnerabilityDescription>Details + Description</VulnerabilityDescription>
+        <VulnerabilityResolution>Recomendation</VulnerabilityResolution>
+        <VulnerabilityReferences>
+          <VulnerabilityReference>REFERENCE URI</VulnerabilityReference>
+        </VulnerabilityReferences>
+        <VulnerableHosts>
+          <!--
+            subid values:
+              type = HOST -> subid=""
+              type = SERVICE | WEB -> subid="SERVICE ID"
+          -->
+          <VulnerableHost id="" subid=""/>
+        </VulnerableHosts>
+
+        <WebVulnerabilityDetails> <!-- Only for Web Vulnerabilities-->
+          <VulnerabilityWebSite>WEBSITE</VulnerabilityWebSite>
+          <VulnerabilityPath>PATH</VulnerabilityPath>
+          <VulnerabilityRequest>REQUEST</VulnerabilityRequest>
+          <VulnerabilityResponse>RESPONSE</VulnerabilityResponse>
+          <VulnerabilityParams>PARAMETERS</VulnerabilityParams>
+          <VulnerabilityMethod>METHOD</VulnerabilityMethod><!-- No Obligatorio -->
+          <VulnerabilityPName>PNAME</VulnerabilityPName><!-- No Obligatorio -->
+          <VulnerabilityQuery>QUERY</VulnerabilityQuery><!-- No Obligatorio -->
+          <VulnerabilityCategory>CATEGORY</VulnerabilityCategory><!-- No Obligatorio -->
+        </WebVulnerabilityDetails>
+      </Vulnerability>
+    </Vulnerabilities>
+</Report>
